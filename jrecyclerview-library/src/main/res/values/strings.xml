@@ -1,0 +1,4 @@
+<resources>
+    <string name="load_more_state_fail">加载失败，请重试</string>
+    <string name="load_more_state_nomoredata">无更多数据</string>
+</resources>
