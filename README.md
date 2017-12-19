@@ -1,5 +1,6 @@
 # JRecyclerView
 JRecyclerView是一个继承自Recyclerview的扩展类库，简化了viewholder的用法，增加了滑动到底部加载更多，一行代码开启item拖动滑动以及适配器中的数据操作。堪称是居家旅行，开发必备之良品，当然，这个项目很久之前就开始开发了，一直拖到2017年初才开始写readme，实在是够懒！
+
 #集成方法
 step1：在根build.gradle中加入
         
