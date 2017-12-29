@@ -12,8 +12,6 @@ import com.jtechlib2.adapter.LoadFooterAdapter;
 import com.jtechlib2.adapter.LoadMoreAdapter;
 import com.jtechlib2.adapter.SimpleLoadFooterAdapter;
 import com.jtechlib2.listener.ItemTouchCallback;
-import com.jtechlib2.listener.OnItemClickListener;
-import com.jtechlib2.listener.OnItemLongClickListener;
 import com.jtechlib2.listener.OnItemViewMoveListener;
 import com.jtechlib2.listener.OnItemViewSwipeListener;
 import com.jtechlib2.listener.OnLoadListener;
@@ -84,14 +82,6 @@ public class JRecyclerView extends RecyclerView {
      * 加载更多监听
      */
     private OnLoadListener onLoadListener;
-    /**
-     * item点击事件监听
-     */
-    private OnItemClickListener onItemClickListener;
-    /**
-     * item长点击事件监听
-     */
-    private OnItemLongClickListener onItemLongClickListener;
 
     /**
      * 主构造
@@ -377,30 +367,6 @@ public class JRecyclerView extends RecyclerView {
     }
 
     /**
-     * 设置item点击事件监听
-     *
-     * @param onItemClickListener item点击事件监听
-     */
-    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
-        this.onItemClickListener = onItemClickListener;
-        if (null != loadMoreAdapter) {
-            loadMoreAdapter.setOnItemClickListener(onItemClickListener);
-        }
-    }
-
-    /**
-     * 设置item长点击事件监听
-     *
-     * @param onItemLongClickListener item长点击事件监听
-     */
-    public void setOnItemLongClickListener(OnItemLongClickListener onItemLongClickListener) {
-        this.onItemLongClickListener = onItemLongClickListener;
-        if (null != loadMoreAdapter) {
-            loadMoreAdapter.setOnItemLongClickListener(onItemLongClickListener);
-        }
-    }
-
-    /**
      * 设置适配器
      *
      * @param adapter 适配器
@@ -420,8 +386,6 @@ public class JRecyclerView extends RecyclerView {
         loadMoreAdapter = new LoadMoreAdapter(getContext(), adapter, loadMoreFooter);
         loadMoreAdapter.setLoadMore(loadMore);
         loadMoreAdapter.setLayoutState(layoutState);
-        loadMoreAdapter.setOnItemClickListener(onItemClickListener);
-        loadMoreAdapter.setOnItemLongClickListener(onItemLongClickListener);
         //设置touch
         itemTouchCallback.setLoadMoreAdapter(loadMoreAdapter);
         super.setAdapter(loadMoreAdapter);

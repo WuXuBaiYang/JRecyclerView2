@@ -2,12 +2,12 @@ apply plugin: 'com.android.library'
 apply plugin: 'com.novoda.bintray-release'
 
 android {
-    compileSdkVersion 25
-    buildToolsVersion "25.0.2"
+    compileSdkVersion 27
+    buildToolsVersion "27.0.2"
 
     defaultConfig {
         minSdkVersion 14
-        targetSdkVersion 25
+        targetSdkVersion 27
         versionCode 1
         versionName "1.0"
 
@@ -29,11 +29,11 @@ publish {
     userOrg = 'wuxubaiyang'
     groupId = 'com.jtechlib2'
     artifactId = 'jrecycler-library'
-    publishVersion = '2.0.1'
-    desc = 'a simple recyclerview lib'
+    publishVersion = '2.0.2'
+    desc = 'delete itemclick and itemlongclick listener'
     website = 'https://github.com/WuXuBaiYang'
 }
 
 dependencies {
-    compile 'com.android.support:recyclerview-v7:25.3.1'
+    compile 'com.android.support:recyclerview-v7:27.0.2'
 }

@@ -4,11 +4,8 @@ import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
-import com.jtechlib2.listener.OnItemClickListener;
-import com.jtechlib2.listener.OnItemLongClickListener;
 import com.jtechlib2.listener.RecyclerDataObserver;
 import com.jtechlib2.view.JRecyclerView;
 import com.jtechlib2.view.RecyclerHolder;
@@ -23,8 +20,6 @@ public class LoadMoreAdapter extends RecyclerView.Adapter {
     private LoadFooterAdapter loadFooterAdapter;
     private RecyclerHolder recyclerHolder;
     private RecyclerView.Adapter originAdapter;
-    private OnItemClickListener onItemClickListener;
-    private OnItemLongClickListener onItemLongClickListener;
     private Context context;
     private boolean loadMore;
     private int layoutState;
@@ -43,14 +38,6 @@ public class LoadMoreAdapter extends RecyclerView.Adapter {
 
     public void setLayoutState(int layoutState) {
         this.layoutState = layoutState;
-    }
-
-    public void setOnItemClickListener(OnItemClickListener onItemClickListener) {
-        this.onItemClickListener = onItemClickListener;
-    }
-
-    public void setOnItemLongClickListener(OnItemLongClickListener onItemLongClickListener) {
-        this.onItemLongClickListener = onItemLongClickListener;
     }
 
     public RecyclerView.Adapter getOriginAdapter() {
@@ -105,25 +92,6 @@ public class LoadMoreAdapter extends RecyclerView.Adapter {
         } else {
             //调用适配器的bindview方法
             originAdapter.onBindViewHolder(holder, position);
-            //设置item的点击事件
-            holder.itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (null != onItemClickListener) {
-                        onItemClickListener.onItemClick(holder instanceof RecyclerHolder ? (RecyclerHolder) holder : null, v, position);
-                    }
-                }
-            });
-            //设置item的长点击事件
-            holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View v) {
-                    if (null != onItemLongClickListener) {
-                        return onItemLongClickListener.onItemLongClick(holder instanceof RecyclerHolder ? (RecyclerHolder) holder : null, v, position);
-                    }
-                    return false;
-                }
-            });
         }
     }
 
