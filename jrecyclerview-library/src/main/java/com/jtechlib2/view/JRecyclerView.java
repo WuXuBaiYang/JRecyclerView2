@@ -96,7 +96,7 @@ public class JRecyclerView extends RecyclerView {
      * 主构造
      *
      * @param context context
-     * @param attrs attrs
+     * @param attrs   attrs
      */
     public JRecyclerView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
@@ -106,8 +106,8 @@ public class JRecyclerView extends RecyclerView {
      * 主构造
      *
      * @param context context
-     * @param attrs attrs
-     * @param arg2 styleid
+     * @param attrs   attrs
+     * @param arg2    styleid
      */
     public JRecyclerView(Context context, AttributeSet attrs, int arg2) {
         super(context, attrs, arg2);
@@ -209,7 +209,7 @@ public class JRecyclerView extends RecyclerView {
     /**
      * 自由滑动
      *
-     * @param swipeEnabled 是否开启滑动
+     * @param swipeEnabled            是否开启滑动
      * @param onItemViewSwipeListener 滑动监听
      */
     public void setSwipeFree(boolean swipeEnabled, OnItemViewSwipeListener onItemViewSwipeListener) {
@@ -448,12 +448,13 @@ public class JRecyclerView extends RecyclerView {
             } else if (layoutState == LAYOUT_STATE_STAGGERED) {// 交错布局
                 int[] lastPositions = ((StaggeredGridLayoutManager) getLayoutManager())
                         .findLastVisibleItemPositions(null);
-                int footer = loadMoreAdapter.getItemCount() - 1;
-                for (int i = 0; i < lastPositions.length; i++) {
-                    if (lastPositions[i] != footer) {
+                int footerPosition = loadMoreAdapter.getItemCount() - 1;
+                for (int lastPosition : lastPositions) {
+                    if (lastPosition != footerPosition) {
                         flag = false;
                         break;
                     }
+
                 }
             }
             loadState = flag ? LOAD_STATE_LOADING : LOAD_STATE_NORMAL;
