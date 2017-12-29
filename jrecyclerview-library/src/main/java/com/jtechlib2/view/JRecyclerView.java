@@ -454,7 +454,6 @@ public class JRecyclerView extends RecyclerView {
                         flag = false;
                         break;
                     }
-
                 }
             }
             loadState = flag ? LOAD_STATE_LOADING : LOAD_STATE_NORMAL;
