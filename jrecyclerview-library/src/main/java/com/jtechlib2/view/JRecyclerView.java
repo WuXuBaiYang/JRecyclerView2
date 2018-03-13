@@ -71,6 +71,10 @@ public class JRecyclerView extends RecyclerView {
      */
     private boolean scrollUp = false;
     /**
+     * 是否向左滚动（横向滚动）
+     */
+    private boolean scrollLeft = false;
+    /**
      * item的触摸事件回调实现
      */
     private ItemTouchCallback itemTouchCallback;
@@ -423,7 +427,8 @@ public class JRecyclerView extends RecyclerView {
     public void onScrolled(int dx, int dy) {
         super.onScrolled(dx, dy);
         this.scrollUp = dy > 0;
-        if (!scrollUp && loadState == LOAD_STATE_FAIL) {
+        this.scrollLeft = dx > 0;
+        if ((!scrollUp || !scrollLeft) && loadState == LOAD_STATE_FAIL) {
             loadState = LOAD_STATE_NORMAL;
             loadMoreAdapter.modifyState(loadState);
         }
@@ -437,7 +442,7 @@ public class JRecyclerView extends RecyclerView {
     @Override
     public void onScrollStateChanged(int state) {
         super.onScrollStateChanged(state);
-        if (RecyclerView.SCROLL_STATE_IDLE == state && loadMore && scrollUp && loadState == LOAD_STATE_NORMAL && null != loadMoreAdapter && null != onLoadListener) {
+        if (RecyclerView.SCROLL_STATE_IDLE == state && loadMore && (scrollUp || scrollLeft) && loadState == LOAD_STATE_NORMAL && null != loadMoreAdapter && null != onLoadListener) {
             boolean flag = true;
             if (layoutState == LAYOUT_STATE_LINEAR) {// 线性布局
                 int lastPosition = ((LinearLayoutManager) getLayoutManager()).findLastVisibleItemPosition();
