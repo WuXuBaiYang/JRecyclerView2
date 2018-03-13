@@ -29,8 +29,8 @@ publish {
     userOrg = 'wuxubaiyang'
     groupId = 'com.jtechlib2'
     artifactId = 'jrecycler-library'
-    publishVersion = '2.0.2'
-    desc = 'delete itemclick and itemlongclick listener'
+    publishVersion = '2.0.3'
+    desc = 'fix some bugs'
     website = 'https://github.com/WuXuBaiYang'
 }
 
