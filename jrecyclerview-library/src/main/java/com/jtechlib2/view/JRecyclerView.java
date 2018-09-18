@@ -67,14 +67,6 @@ public class JRecyclerView extends RecyclerView {
      */
     private LoadMoreAdapter loadMoreAdapter;
     /**
-     * 是否向上滚动(滚动到底部)
-     */
-    private boolean scrollUp = false;
-    /**
-     * 是否向左滚动（横向滚动）
-     */
-    private boolean scrollLeft = false;
-    /**
      * item的触摸事件回调实现
      */
     private ItemTouchCallback itemTouchCallback;
@@ -426,46 +418,19 @@ public class JRecyclerView extends RecyclerView {
     @Override
     public void onScrolled(int dx, int dy) {
         super.onScrolled(dx, dy);
-        this.scrollUp = dy > 0;
-        this.scrollLeft = dx > 0;
+        boolean scrollUp = dy > 0;
+        boolean scrollLeft = dx > 0;
+        //重置加载失败的状态
         if ((!scrollUp || !scrollLeft) && loadState == LOAD_STATE_FAIL) {
             loadState = LOAD_STATE_NORMAL;
             loadMoreAdapter.modifyState(loadState);
         }
-    }
-
-    /**
-     * 滚动状态
-     *
-     * @param state 滚动状态
-     */
-    @Override
-    public void onScrollStateChanged(int state) {
-        super.onScrollStateChanged(state);
-        if (RecyclerView.SCROLL_STATE_IDLE == state && loadMore && (scrollUp || scrollLeft) && loadState == LOAD_STATE_NORMAL && null != loadMoreAdapter && null != onLoadListener) {
-            boolean flag = true;
-            if (layoutState == LAYOUT_STATE_LINEAR) {// 线性布局
-                int lastPosition = ((LinearLayoutManager) getLayoutManager()).findLastVisibleItemPosition();
-                flag = lastPosition == (loadMoreAdapter.getItemCount() - 1);
-            } else if (layoutState == LAYOUT_STATE_GRID) {// 表格布局
-                int lastPosition = ((GridLayoutManager) getLayoutManager()).findLastVisibleItemPosition();
-                flag = lastPosition == (loadMoreAdapter.getItemCount() - 1);
-            } else if (layoutState == LAYOUT_STATE_STAGGERED) {// 交错布局
-                int[] lastPositions = ((StaggeredGridLayoutManager) getLayoutManager())
-                        .findLastVisibleItemPositions(null);
-                int footerPosition = loadMoreAdapter.getItemCount() - 1;
-                for (int lastPosition : lastPositions) {
-                    if (lastPosition != footerPosition) {
-                        flag = false;
-                        break;
-                    }
-                }
-            }
-            loadState = flag ? LOAD_STATE_LOADING : LOAD_STATE_NORMAL;
-            if (flag) {// 如果标志状态为加载中，则回调方法
-                onLoadListener.loadMore();
-                setLoadState(loadState);
-            }
+        //滑动到底部，并且满足其他条件，则发起加载更多请求
+        if (computeVerticalScrollExtent() + computeVerticalScrollOffset() >= computeVerticalScrollRange()
+                && loadMore && (scrollUp || scrollLeft) && loadState == LOAD_STATE_NORMAL
+                && null != loadMoreAdapter && null != onLoadListener) {
+            onLoadListener.loadMore();
+            setLoadState(LOAD_STATE_LOADING);
         }
     }
 

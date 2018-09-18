@@ -23,6 +23,7 @@ public class SimpleLoadFooterAdapter extends LoadFooterAdapter {
     @Override
     public View getFooterView(LayoutInflater layoutInflater, ViewGroup parent) {
         View view = layoutInflater.inflate(R.layout.load_footer, parent, false);
+        view.setTag("footer");
         return view;
     }
 

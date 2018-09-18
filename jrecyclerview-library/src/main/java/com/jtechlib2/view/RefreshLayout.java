@@ -161,6 +161,8 @@ public class RefreshLayout extends ViewGroup implements NestedScrollingParent, N
 
     // Whether the client has set a custom starting position;
     private boolean mUsingCustomStart;
+    //标记为指示器，用户不可手动下载刷新
+    private boolean mIndicator = false;
 
     private AnimationListener mRefreshListener = new AnimationListener() {
         @Override
@@ -199,6 +201,16 @@ public class RefreshLayout extends ViewGroup implements NestedScrollingParent, N
             mCurrentTargetOffsetTop = mCircleView.getTop();
         }
     };
+
+    /**
+     * 设置为指示器，不可手动下拉刷新
+     *
+     * @param isIndicator
+     */
+    public void setAsIndicator(boolean isIndicator) {
+        this.mIndicator = isIndicator;
+        setEnabled(!isIndicator);
+    }
 
     private void setColorViewAlpha(int targetAlpha) {
         mCircleView.getBackground().setAlpha(targetAlpha);
@@ -248,6 +260,7 @@ public class RefreshLayout extends ViewGroup implements NestedScrollingParent, N
 
     /**
      * One of DEFAULT, or LARGE.
+     *
      * @param size size
      */
     public void setSize(int size) {
@@ -290,7 +303,7 @@ public class RefreshLayout extends ViewGroup implements NestedScrollingParent, N
      * Constructor that is called when inflating SwipeRefreshLayout from XML.
      *
      * @param context context
-     * @param attrs attrs
+     * @param attrs   attrs
      */
     public RefreshLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -349,6 +362,7 @@ public class RefreshLayout extends ViewGroup implements NestedScrollingParent, N
     /**
      * Set the listener to be notified when a refresh is triggered via the swipe
      * gesture.
+     *
      * @param listener listener
      */
     public void setOnRefreshListener(OnRefreshListener listener) {
@@ -368,9 +382,6 @@ public class RefreshLayout extends ViewGroup implements NestedScrollingParent, N
      */
     public void startRefreshing() {
         setEnabled(false);
-        if (null != mListener) {
-            mListener.onRefresh();
-        }
         moveSpinner(mTotalUnconsumed);
         setRefreshing(true, true);
     }
@@ -381,12 +392,12 @@ public class RefreshLayout extends ViewGroup implements NestedScrollingParent, N
     public void refreshingComplete() {
         setRefreshing(false, false /* notify */);
         if (refreshTimeMillis != 0 && (System.currentTimeMillis() - refreshTimeMillis) > REFRESH_FREQUENCY) {
-            setEnabled(true);
+            setEnabled(!mIndicator);
         } else {
             new Handler().postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    setEnabled(true);
+                    setEnabled(!mIndicator);
                 }
             }, REFRESH_FREQUENCY - (System.currentTimeMillis() - refreshTimeMillis));
         }
@@ -511,8 +522,8 @@ public class RefreshLayout extends ViewGroup implements NestedScrollingParent, N
     }
 
     /**
+     * @param colorRes color
      * @deprecated Use {@link #setProgressBackgroundColorSchemeResource(int)}
-     * @param colorRes  color
      */
     @Deprecated
     public void setProgressBackgroundColor(int colorRes) {
@@ -540,8 +551,8 @@ public class RefreshLayout extends ViewGroup implements NestedScrollingParent, N
     }
 
     /**
+     * @param colors colors
      * @deprecated Use {@link #setColorSchemeResources(int...)}
-     * @param colors  colors
      */
     @Deprecated
     public void setColorScheme(@ColorRes int... colors) {
