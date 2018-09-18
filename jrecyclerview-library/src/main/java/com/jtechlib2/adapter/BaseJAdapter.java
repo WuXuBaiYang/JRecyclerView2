@@ -275,8 +275,9 @@ public abstract class BaseJAdapter<VH extends RecyclerHolder, D> extends Recycle
         if (loadMore) {
             addDatas(datas);
         } else {
+            notifyItemRangeRemoved(0, realDatas.size());
             realDatas = new ArrayList<>(datas);
-            notifyDataSetChanged();
+            notifyItemRangeChanged(0, realDatas.size());
         }
         setpage(loadMore);
     }
