@@ -29,7 +29,7 @@ publish {
     userOrg = 'wuxubaiyang'
     groupId = 'com.jtechlib2'
     artifactId = 'jrecycler-library'
-    publishVersion = '2.0.4'
+    publishVersion = '2.0.5'
     desc = 'fix some bugs'
     website = 'https://github.com/WuXuBaiYang'
 }
