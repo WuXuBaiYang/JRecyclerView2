@@ -5,7 +5,7 @@ JRecyclerView是一个继承自Recyclerview的扩展类库，简化了viewholder
 step1：在根build.gradle中加入
         
 	dependencies {
-	        compile 'com.jtechlib2:jrecycler-library:2.0.5'
+	        compile 'com.jtechlib2:jrecycler-library:2.0.6'
 	}
 	
 #下拉刷新&加载更多
