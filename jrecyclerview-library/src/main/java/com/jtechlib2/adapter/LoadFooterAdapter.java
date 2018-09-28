@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 
 import com.jtechlib2.view.RecyclerHolder;
 
+
 /**
  * 加载更多的足部适配器
  * Created by wuxubaiyang on 2016/3/7.

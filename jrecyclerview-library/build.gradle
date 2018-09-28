@@ -29,11 +29,12 @@ publish {
     userOrg = 'wuxubaiyang'
     groupId = 'com.jtechlib2'
     artifactId = 'jrecycler-library'
-    publishVersion = '2.0.5'
+    publishVersion = '2.0.6'
     desc = 'fix some bugs'
     website = 'https://github.com/WuXuBaiYang'
 }
 
 dependencies {
-    implementation 'com.android.support:recyclerview-v7:27.0.2'
+    implementation 'com.android.support:appcompat-v7:27.1.1'
+    implementation 'com.android.support:recyclerview-v7:27.1.1'
 }

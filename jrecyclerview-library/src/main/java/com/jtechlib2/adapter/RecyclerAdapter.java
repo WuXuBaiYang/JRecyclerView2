@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 
 import com.jtechlib2.view.RecyclerHolder;
 
+
 /**
  * 通用适配器
  * Created by jianghan on 2016/9/9.
