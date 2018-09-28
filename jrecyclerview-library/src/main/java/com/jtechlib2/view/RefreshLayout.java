@@ -205,7 +205,7 @@ public class RefreshLayout extends ViewGroup implements NestedScrollingParent, N
     /**
      * 设置为指示器，不可手动下拉刷新
      *
-     * @param isIndicator
+     * @param isIndicator 是否为指示器
      */
     public void setAsIndicator(boolean isIndicator) {
         this.mIndicator = isIndicator;
