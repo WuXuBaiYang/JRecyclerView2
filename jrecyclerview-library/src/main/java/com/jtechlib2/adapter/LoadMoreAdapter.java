@@ -1,6 +1,7 @@
 package com.jtechlib2.adapter;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
@@ -67,8 +68,9 @@ public class LoadMoreAdapter extends RecyclerView.Adapter {
         return originAdapter.getItemViewType(position);
     }
 
+    @NonNull
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         if (viewType == ITEM_FOOTER) {
             if (null == recyclerHolder) {
                 //实例化足部视图的viewholder
@@ -83,7 +85,7 @@ public class LoadMoreAdapter extends RecyclerView.Adapter {
     }
 
     @Override
-    public void onBindViewHolder(final RecyclerView.ViewHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final RecyclerView.ViewHolder holder, final int position) {
         //处理footer
         if (ITEM_FOOTER == getItemViewType(position)) {
             if (layoutState == JRecyclerView.LAYOUT_STATE_STAGGERED) {

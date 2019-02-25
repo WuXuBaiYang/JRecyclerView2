@@ -9,6 +9,7 @@ import com.jtechlib2.adapter.LoadMoreAdapter;
 import com.jtechlib2.adapter.RecyclerSwipeAdapter;
 import com.jtechlib2.view.RecyclerHolder;
 
+
 /**
  * 自定义滑动删除以及拖动换位
  */
